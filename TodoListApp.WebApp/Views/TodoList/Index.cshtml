@@ -1,0 +1,26 @@
+@model IEnumerable<TodoListApp.Services.Models.TodoList>
+
+<h2>To-Do Lists</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var todoList in Model)
+		{
+			<tr>
+				<td>@todoList.Name</td>
+				<td>@todoList.Description</td>
+				<td>
+					<a href="#">Edit</a> |
+					<a href="#">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
