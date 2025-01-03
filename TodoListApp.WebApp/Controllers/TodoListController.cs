@@ -65,4 +65,31 @@ public class TodoListController : Controller
 
         return this.RedirectToAction(nameof(this.Index));
     }
+
+    // Get: /Todolist/Edit/{id}
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var todolist = await this.todoListWebApiService.GetByIdAsync(id);
+
+        if (todolist is null)
+        {
+            return this.NotFound();
+        }
+
+        return this.View(todolist);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(TodoList todolist)
+    {
+        if (!this.ModelState.IsValid)
+        {
+            return this.View(todolist);
+        }
+
+        await this.todoListWebApiService.UpdateAsync(todolist);
+        return this.RedirectToAction(nameof(this.Index));
+    }
 }
