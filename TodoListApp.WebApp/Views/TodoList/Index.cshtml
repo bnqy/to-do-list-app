@@ -1,6 +1,6 @@
 @model IEnumerable<TodoListApp.Services.Models.TodoList>
 
-<h2>To-Do Lists</h2>
+<h2>To-Do Lists</h2> <a href="TodoList/Create">Create</a>
 
 <table class="table">
 	<thead>
@@ -17,8 +17,8 @@
 				<td>@todoList.Name</td>
 				<td>@todoList.Description</td>
 				<td>
-					<a href="#">Edit</a> |
-					<a href="#">Delete</a>
+					<a asp-action="Edit" asp-route-id="@todoList.Id" class="btn btn-primary">Edit</a>
+					<a asp-action="Delete" asp-route-id="@todoList.Id" class="btn btn-danger">Delete</a>
 				</td>
 			</tr>
 		}

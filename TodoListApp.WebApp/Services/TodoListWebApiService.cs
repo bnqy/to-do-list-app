@@ -1,3 +1,4 @@
+using System.Net.Http;
 using TodoListApp.Services.Models;
 
 namespace TodoListApp.WebApp.Services;
@@ -29,6 +30,10 @@ public class TodoListWebApiService : ITodoListWebApiService
     public async Task<TodoList> GetByIdAsync(int id)
     {
         return await this.httpClient.GetFromJsonAsync<TodoList>($"api/TodoList/{id}");
+
+        /*var response = await this.httpClient.GetAsync($"api/TodoList/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<TodoList>();*/
     }
 
     public async Task UpdateAsync(TodoList todoList)
