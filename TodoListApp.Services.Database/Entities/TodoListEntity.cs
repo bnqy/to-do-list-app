@@ -20,4 +20,6 @@ public class TodoListEntity
 
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    public ICollection<TaskEntity> Tasks { get; set; } = new List<TaskEntity>();
 }
