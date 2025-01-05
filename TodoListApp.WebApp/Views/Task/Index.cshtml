@@ -1,0 +1,29 @@
+@model IEnumerable<TodoListApp.Services.Models.TaskTodo>
+
+<h2>Tasks</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var task in Model)
+		{
+			<tr>
+				<td>@task.Title</td>
+				<td>@task.Description</td>
+				<td>@(task.IsCompleted ? "Completed" : "Pending")</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@task.Id">Details</a> |
+					<a asp-action="Edit" asp-route-id="@task.Id">Edit</a> |
+					<a asp-action="Delete" asp-route-id="@task.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<a asp-action="Create" asp-route-todoListId="@ViewBag.TodoListId" class="btn btn-primary">Add New Task</a>

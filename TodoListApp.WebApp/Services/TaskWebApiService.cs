@@ -13,26 +13,26 @@ public class TaskWebApiService : ITaskWebApiService
 
     public async Task AddTaskAsync(TaskTodo task)
     {
-        await this.httpClient.PostAsJsonAsync("api/tasks", task);
+        await this.httpClient.PostAsJsonAsync("api/task", task);
     }
 
     public async Task DeleteTaskAsync(int taskId)
     {
-        await this.httpClient.DeleteAsync($"api/tasks/{taskId}");
+        await this.httpClient.DeleteAsync($"api/task/{taskId}");
     }
 
     public async Task<TaskTodo> GetTaskByIdAsync(int taskId)
     {
-        return await this.httpClient.GetFromJsonAsync<TaskTodo>($"api/tasks/{taskId}");
+        return await this.httpClient.GetFromJsonAsync<TaskTodo>($"api/task/{taskId}");
     }
 
     public async Task<IEnumerable<TaskTodo>> GetTasksByTodoListIdAsync(int todoListId)
     {
-        return await this.httpClient.GetFromJsonAsync<IEnumerable<TaskTodo>>($"api/tasks/todolist/{todoListId}");
+        return await this.httpClient.GetFromJsonAsync<IEnumerable<TaskTodo>>($"api/task/todolist/{todoListId}");
     }
 
     public async Task UpdateTaskAsync(TaskTodo task)
     {
-        await this.httpClient.PutAsJsonAsync($"api/tasks/{task.Id}", task);
+        await this.httpClient.PutAsJsonAsync($"api/task/{task.Id}", task);
     }
 }
