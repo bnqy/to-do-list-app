@@ -53,7 +53,7 @@ namespace TodoListApp.Services.Database.Migrations
 
                     b.HasIndex("TodoListId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("TodoListApp.Services.Database.Entities.TodoListEntity", b =>
@@ -82,7 +82,7 @@ namespace TodoListApp.Services.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TodoLists");
+                    b.ToTable("TodoLists", (string)null);
                 });
 
             modelBuilder.Entity("TodoListApp.Services.Database.Entities.TaskEntity", b =>
