@@ -40,12 +40,17 @@ public class TaskController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(TaskTodo task)
     {
-        if (ModelState.IsValid)
+        Console.WriteLine("ModelsTATES out if");
+        if (this.ModelState.IsValid)
         {
+            Console.WriteLine("ModelsTATES in if");
+
             await this.taskWebApiService.AddTaskAsync(task);
 
-            return this.RedirectToAction(nameof(this.Index), new {todoListId = task.TodoListId});
+            return this.RedirectToAction(nameof(this.Index), new { todoListId = task.TodoListId });
         }
+
+        Console.WriteLine("ModelsTATES out if 2");
 
         return this.View(task);
     }

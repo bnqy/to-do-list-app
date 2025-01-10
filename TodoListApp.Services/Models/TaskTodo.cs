@@ -17,10 +17,18 @@ public class TaskTodo
     [MaxLength(500, ErrorMessage = "Max length of Description is 500.")]
     public string? Description { get; set; }
 
-    public DateTime? DueDate { get; set; }
+    [Required(ErrorMessage = "Enter due date.")]
+    public DateTime? DueDate { get; set; } = DateTime.MaxValue;
 
     public bool IsCompleted { get; set; } = false;
 
+    public string StatusId { get; set; } = "Not Started";
+
+    public bool Completed => StatusId?.ToLower() == "completed" || IsCompleted;
+
+
     [Required(ErrorMessage = "TodoList id is required.")]
     public int TodoListId { get; set; }
+
+    public bool Overdue => (StatusId?.ToLower() == "in progress" || StatusId?.ToLower() == "not started") && DueDate < DateTime.Today;
 }

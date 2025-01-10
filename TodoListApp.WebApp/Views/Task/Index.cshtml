@@ -16,7 +16,7 @@
 			<tr>
 				<td>@task.Title</td>
 				<td>@task.Description</td>
-				<td>@(task.IsCompleted ? "Completed" : "Pending")</td>
+				<td>@(task.StatusId == "not started" ? "Not Started" : task.StatusId == "in progress" ? "In Progress" : "Completed")</td>
 				<td>
 					<a asp-action="Details" asp-route-id="@task.Id" class="btn btn-outline-info">Details</a> |
 					<a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary">Edit</a> |

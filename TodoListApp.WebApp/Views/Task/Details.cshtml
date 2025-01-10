@@ -7,6 +7,9 @@
 	<dt>Description</dt>
 	<dd>@Model.Description</dd>
 	<dt>Status</dt>
+	<dd>@(Model.StatusId == "not started" ? "Not Started" : Model.StatusId == "in progress" ? "In Progress" : "Completed")</dd>
 	<dd>@(Model.IsCompleted ? "Completed" : "Pending")</dd>
+	<dt>Due Date</dt>
+	<dd>@Model.DueDate</dd>
 </dl>
 <a asp-action="Index" asp-route-todoListId="@Model.TodoListId" class="btn btn-secondary">Back to List</a>

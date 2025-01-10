@@ -29,6 +29,7 @@ public class TaskDatabaseService : ITaskDatabaseService
             DueDate = task.DueDate,
             IsCompleted = task.IsCompleted,
             TodoListId = task.TodoListId,
+            StatusId = "not started",
         };
 
         this.todoListDbContext.Tasks.Add(taskEntity);
@@ -62,6 +63,7 @@ public class TaskDatabaseService : ITaskDatabaseService
                 DueDate = task.DueDate,
                 IsCompleted = task.IsCompleted,
                 TodoListId = task.TodoListId,
+                StatusId = task.StatusId,
             };
     }
 
@@ -77,6 +79,7 @@ public class TaskDatabaseService : ITaskDatabaseService
                 IsCompleted = task.IsCompleted,
                 DueDate = task.DueDate,
                 TodoListId = task.TodoListId,
+                StatusId = task.StatusId,
             })
             .ToListAsync();
     }

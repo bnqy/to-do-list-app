@@ -20,12 +20,25 @@ public class TaskEntity
     [MaxLength(500)]
     public string? Description { get; set; }
 
+    [Required]
     public DateTime? DueDate { get; set; }
 
-    public bool IsCompleted { get; set; } = false;
+    //public bool Completed => StatusId?.ToLower() == "Completed";
+
+    public bool Completed { get; set; }
+
+    public bool IsCompleted { get; set; }
+
+    public bool Overdue { get; set; }
+    //public bool Overdue => (StatusId?.ToLower() == "in progress" || StatusId?.ToLower() == "not started") && DueDate < DateTime.Today;
 
     [ForeignKey(nameof(TodoListEntity))]
     public int TodoListId { get; set; }
 
+    [ForeignKey(nameof(StatusEntity))]
+    public string StatusId { get; set; } = "Not Started";
+
     public TodoListEntity TodoList { get; set; }
+
+    public StatusEntity Status { get; set; }
 }
