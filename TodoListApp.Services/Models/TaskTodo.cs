@@ -31,4 +31,6 @@ public class TaskTodo
     public int TodoListId { get; set; }
 
     public bool Overdue => (StatusId?.ToLower() == "in progress" || StatusId?.ToLower() == "not started") && DueDate < DateTime.Today;
+
+    public string AssignedToUserId { get; set; }
 }

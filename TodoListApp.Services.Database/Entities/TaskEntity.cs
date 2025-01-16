@@ -38,6 +38,8 @@ public class TaskEntity
     [ForeignKey(nameof(StatusEntity))]
     public string StatusId { get; set; } = "Not Started";
 
+    public string? AssignedToUserId { get; set; } = null!;
+
     public TodoListEntity TodoList { get; set; }
 
     public StatusEntity Status { get; set; }

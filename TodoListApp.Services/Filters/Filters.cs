@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TodoListApp.Services.Filters;
-public class Filters
+public class Filter
 {
 }
