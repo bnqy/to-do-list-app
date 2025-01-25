@@ -18,6 +18,7 @@ public class HomeController : Controller
         this._logger = logger;
     }
 
+#pragma warning disable CA5395
     public IActionResult Index()
     {
         return this.View();
@@ -33,4 +34,5 @@ public class HomeController : Controller
     {
         return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
     }
+#pragma warning restore CA5395
 }

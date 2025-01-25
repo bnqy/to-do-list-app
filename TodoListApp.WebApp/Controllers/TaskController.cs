@@ -13,6 +13,7 @@ public class TaskController : Controller
     }
 
 #pragma warning disable S6967 // ModelState.IsValid should be called in controller actions
+    [HttpGet]
     public async Task<IActionResult> Index(int todoListId)
 #pragma warning restore S6967 // ModelState.IsValid should be called in controller actions
     {
@@ -24,6 +25,7 @@ public class TaskController : Controller
     }
 
 #pragma warning disable S6967 // ModelState.IsValid should be called in controller actions
+    [HttpGet]
     public async Task<IActionResult> Details(int id)
 #pragma warning restore S6967 // ModelState.IsValid should be called in controller actions
     {

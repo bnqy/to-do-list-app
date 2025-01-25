@@ -1,7 +1,10 @@
 @model IEnumerable<TodoListApp.Services.Models.TaskTodo>
 
+
+
 <h2>Tasks</h2>
 <table class="table">
+	<caption>Tasks table</caption>
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -13,10 +16,23 @@
 	<tbody>
 		@foreach (var task in Model)
 		{
+			string status;
+			if (task.StatusId == "not started")
+			{
+				status = "Not Started";
+			}
+			else if (task.StatusId == "in progress")
+			{
+				status = "In Progress";
+			}
+			else
+			{
+				status = "Completed";
+			}
 			<tr>
 				<td>@task.Title</td>
 				<td>@task.Description</td>
-				<td>@(task.StatusId == "not started" ? "Not Started" : task.StatusId == "in progress" ? "In Progress" : "Completed")</td>
+				<td>@status</td>
 				<td>
 					<a asp-action="Details" asp-route-id="@task.Id" class="btn btn-outline-info">Details</a> |
 					<a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-secondary">Edit</a> |

@@ -13,6 +13,7 @@ public class TodoListController : Controller
     }
 
     // Get: /TodoList
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var todolists = await this.todoListWebApiService.GetAllAsync();
@@ -21,6 +22,7 @@ public class TodoListController : Controller
     }
 
     // Get: /TodoList/Create
+    [HttpGet]
     public IActionResult Create()
     {
         return this.View();
