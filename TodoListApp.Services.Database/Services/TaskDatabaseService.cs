@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoListApp.Services.Database.Contexts;
 using TodoListApp.Services.Database.Entities;
@@ -21,6 +16,7 @@ public class TaskDatabaseService : ITaskDatabaseService
 
     public async Task CreateTaskAsync(TaskTodo task)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         var taskEntity = new TaskEntity
         {
             Id = task.Id,
@@ -30,11 +26,13 @@ public class TaskDatabaseService : ITaskDatabaseService
             IsCompleted = task.IsCompleted,
             TodoListId = task.TodoListId,
             StatusId = "not started",
+            AssignedToUserId = string.Empty,
         };
+#pragma warning restore CA1062 // Validate arguments of public methods
 
-        this.todoListDbContext.Tasks.Add(taskEntity);
+        _ = this.todoListDbContext.Tasks.Add(taskEntity);
 
-        await this.todoListDbContext.SaveChangesAsync();
+        _ = await this.todoListDbContext.SaveChangesAsync();
     }
 
     public async Task DeleteTaskAsync(int taskId)
@@ -43,16 +41,19 @@ public class TaskDatabaseService : ITaskDatabaseService
 
         if (taskEntity is not null)
         {
-            this.todoListDbContext.Tasks.Remove(taskEntity);
+            _ = this.todoListDbContext.Tasks.Remove(taskEntity);
 
-            await this.todoListDbContext.SaveChangesAsync();
+            _ = await this.todoListDbContext.SaveChangesAsync();
         }
     }
 
+#pragma warning disable CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
     public async Task<TaskTodo>? GetTaskByIdAsync(int taskId)
+#pragma warning restore CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
     {
         var task = await this.todoListDbContext.Tasks.FindAsync(taskId);
 
+#pragma warning disable CS8603 // Possible null reference return.
         return task == null
             ? null
             : new TaskTodo
@@ -64,7 +65,9 @@ public class TaskDatabaseService : ITaskDatabaseService
                 IsCompleted = task.IsCompleted,
                 TodoListId = task.TodoListId,
                 StatusId = task.StatusId,
+                AssignedToUserId = task.AssignedToUserId,
             };
+#pragma warning restore CS8603 // Possible null reference return.
     }
 
     public async Task<IEnumerable<TaskTodo>> GetTasksByTodoListIdAsync(int todoListId)
@@ -80,13 +83,16 @@ public class TaskDatabaseService : ITaskDatabaseService
                 DueDate = task.DueDate,
                 TodoListId = task.TodoListId,
                 StatusId = task.StatusId,
+                AssignedToUserId = task.AssignedToUserId,
             })
             .ToListAsync();
     }
 
     public async Task UpdateTaskAsync(TaskTodo task)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         var taskEntity = await this.todoListDbContext.Tasks.FindAsync(task.Id);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
         if (taskEntity is not null)
         {
@@ -95,7 +101,7 @@ public class TaskDatabaseService : ITaskDatabaseService
             taskEntity.IsCompleted = task.IsCompleted;
             taskEntity.DueDate = task.DueDate;
 
-            this.todoListDbContext.SaveChangesAsync();
+            _ = this.todoListDbContext.SaveChangesAsync();
         }
     }
 }

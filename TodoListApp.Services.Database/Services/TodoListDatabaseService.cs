@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoListApp.Services.Database.Contexts;
 using TodoListApp.Services.Database.Entities;
@@ -21,16 +16,18 @@ public class TodoListDatabaseService : ITodoListDatabaseService
 
     public async Task AddAsync(TodoList todoList)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         var entity = new TodoListEntity
         {
             Name = todoList.Name,
             Description = todoList.Description,
             CreatedAt = DateTime.UtcNow,
         };
+#pragma warning restore CA1062 // Validate arguments of public methods
 
-        this.todoListDbContext.TodoLists.Add(entity);
+        _ = this.todoListDbContext.TodoLists.Add(entity);
 
-        await this.todoListDbContext.SaveChangesAsync();
+        _ = await this.todoListDbContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
@@ -41,8 +38,8 @@ public class TodoListDatabaseService : ITodoListDatabaseService
             return;
         }
 
-        this.todoListDbContext.TodoLists.Remove(entity);
-        await this.todoListDbContext.SaveChangesAsync();
+        _ = this.todoListDbContext.TodoLists.Remove(entity);
+        _ = await this.todoListDbContext.SaveChangesAsync();
     }
 
     public async Task<List<TodoList>> GetAllAsync()
@@ -64,7 +61,9 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         var entity = await this.todoListDbContext.TodoLists.FindAsync(id);
         if (entity == null)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return null;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         return new TodoList
@@ -79,7 +78,9 @@ public class TodoListDatabaseService : ITodoListDatabaseService
 
     public async Task UpdateAsync(TodoList todoList)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         var entity = await this.todoListDbContext.TodoLists.FindAsync(todoList.Id);
+#pragma warning restore CA1062 // Validate arguments of public methods
         if (entity == null)
         {
             return;
@@ -89,6 +90,6 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         entity.Description = todoList.Description;
         entity.UpdatedAt = DateTime.UtcNow;
 
-        await this.todoListDbContext.SaveChangesAsync();
+        _ = await this.todoListDbContext.SaveChangesAsync();
     }
 }

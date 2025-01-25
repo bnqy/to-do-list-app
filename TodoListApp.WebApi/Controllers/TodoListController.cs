@@ -44,17 +44,21 @@ public class TodoListController : ControllerBase
     {
         await this.todoListDatabaseService.AddAsync(todoList);
 
-        return this.CreatedAtAction(nameof(this.GetTodoList), new {id = todoList.Id}, todoList);
+#pragma warning disable CA1062 // Validate arguments of public methods
+        return this.CreatedAtAction(nameof(this.GetTodoList), new { id = todoList.Id }, todoList);
+#pragma warning restore CA1062 // Validate arguments of public methods
     }
 
     // Put `4`: api/todolist/{id}
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateTodoList(int id, [FromBody] TodoList todoList)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         if (id != todoList.Id)
         {
             return this.BadRequest("Ids are not match!");
         }
+#pragma warning restore CA1062 // Validate arguments of public methods
 
         await this.todoListDatabaseService.UpdateAsync(todoList);
 

@@ -34,27 +34,26 @@ public class TaskController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddTask([FromBody] TaskTodo task)
     {
-        /*if (!ModelState.IsValid)
-        {
-            return this.BadRequest(ModelState);
-        }*/
-
         await this.taskDatabaseService.CreateTaskAsync(task);
 
-        return this.CreatedAtAction(nameof(GetTaskById), new {taskId = task.Id}, task);
+#pragma warning disable CA1062 // Validate arguments of public methods
+        return this.CreatedAtAction(nameof(this.GetTaskById), new { taskId = task.Id }, task);
+#pragma warning restore CA1062 // Validate arguments of public methods
     }
 
     [HttpPut("{taskId}")]
     public async Task<IActionResult> UpdateTask(int taskId, [FromBody] TaskTodo task)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
         if (taskId != task.Id)
         {
             return this.BadRequest("Task Ids do not match.");
         }
+#pragma warning restore CA1062 // Validate arguments of public methods
 
-        if (!ModelState.IsValid)
+        if (!this.ModelState.IsValid)
         {
-            return this.BadRequest(ModelState);
+            return this.BadRequest(this.ModelState);
         }
 
         await this.taskDatabaseService.UpdateTaskAsync(task);

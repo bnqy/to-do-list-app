@@ -1,4 +1,6 @@
-﻿using System;
+#pragma warning disable IDE0005 // Using directive is unnecessary.
+using System;
+#pragma warning restore IDE0005 // Using directive is unnecessary.
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -9,6 +11,9 @@ namespace TodoListApp.Services.Database.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable IDE0058 // Expression value is never used
+#pragma warning disable SA1413 // Use trailing comma in multi-line initializers
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.CreateTable(
                 name: "TodoLists",
                 columns: table => new
@@ -24,12 +29,19 @@ namespace TodoListApp.Services.Database.Migrations
                 {
                     table.PrimaryKey("PK_TodoLists", x => x.Id);
                 });
+#pragma warning restore CA1062 // Validate arguments of public methods
+#pragma warning restore SA1413 // Use trailing comma in multi-line initializers
+#pragma warning restore IDE0058 // Expression value is never used
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
+#pragma warning disable IDE0058 // Expression value is never used
             migrationBuilder.DropTable(
                 name: "TodoLists");
+#pragma warning restore IDE0058 // Expression value is never used
+#pragma warning restore CA1062 // Validate arguments of public methods
         }
     }
 }

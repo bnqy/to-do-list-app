@@ -1,4 +1,6 @@
-﻿using System;
+#pragma warning disable IDE0005 // Using directive is unnecessary.
+using System;
+#pragma warning restore IDE0005 // Using directive is unnecessary.
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -9,6 +11,8 @@ namespace TodoListApp.Services.Database.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable IDE0058 // Expression value is never used
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DueDate",
                 table: "Tasks",
@@ -33,13 +37,16 @@ namespace TodoListApp.Services.Database.Migrations
                 nullable: false,
                 defaultValue: false);
 
+#pragma warning disable SA1122 // Use string.Empty for empty strings
             migrationBuilder.AddColumn<string>(
                 name: "StatusId",
                 table: "Tasks",
                 type: "nvarchar(450)",
                 nullable: false,
                 defaultValue: "");
+#pragma warning restore SA1122 // Use string.Empty for empty strings
 
+#pragma warning disable SA1413 // Use trailing comma in multi-line initializers
             migrationBuilder.CreateTable(
                 name: "Statuses",
                 columns: table => new
@@ -51,7 +58,9 @@ namespace TodoListApp.Services.Database.Migrations
                 {
                     table.PrimaryKey("PK_Statuses", x => x.Id);
                 });
+#pragma warning restore SA1413 // Use trailing comma in multi-line initializers
 
+#pragma warning disable CA1861 // Avoid constant arrays as arguments
             migrationBuilder.InsertData(
                 table: "Statuses",
                 columns: new[] { "Id", "Name" },
@@ -66,6 +75,7 @@ namespace TodoListApp.Services.Database.Migrations
                 table: "Statuses",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { "not started", "Not Started" });
+#pragma warning restore CA1861 // Avoid constant arrays as arguments
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_StatusId",
@@ -116,3 +126,5 @@ namespace TodoListApp.Services.Database.Migrations
         }
     }
 }
+#pragma warning restore CA1062 // Validate arguments of public methods
+#pragma warning restore IDE0058 // Expression value is never used

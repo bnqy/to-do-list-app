@@ -43,7 +43,9 @@ public class TodoListController : Controller
 
     // Get: /TodoList/Delete/{id}
     [HttpGet]
+#pragma warning disable S6967 // ModelState.IsValid should be called in controller actions
     public async Task<IActionResult> Delete(int id)
+#pragma warning restore S6967 // ModelState.IsValid should be called in controller actions
     {
         var todolist = await this.todoListWebApiService.GetByIdAsync(id);
 
@@ -59,7 +61,9 @@ public class TodoListController : Controller
     [HttpPost]
     [ActionName("Delete")]
     [ValidateAntiForgeryToken]
+#pragma warning disable S6967 // ModelState.IsValid should be called in controller actions
     public async Task<IActionResult> DeleteConfirmed(int id)
+#pragma warning restore S6967 // ModelState.IsValid should be called in controller actions
     {
         await this.todoListWebApiService.DeleteAsync(id);
 
@@ -68,7 +72,11 @@ public class TodoListController : Controller
 
     // Get: /Todolist/Edit/{id}
     [HttpGet]
+#pragma warning disable S4144 // Methods should not have identical implementations
+#pragma warning disable S6967 // ModelState.IsValid should be called in controller actions
     public async Task<IActionResult> Edit(int id)
+#pragma warning restore S6967 // ModelState.IsValid should be called in controller actions
+#pragma warning restore S4144 // Methods should not have identical implementations
     {
         var todolist = await this.todoListWebApiService.GetByIdAsync(id);
 

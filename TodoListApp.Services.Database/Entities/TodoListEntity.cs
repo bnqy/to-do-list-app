@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TodoListApp.Services.Database.Entities;
 public class TodoListEntity
@@ -13,13 +8,20 @@ public class TodoListEntity
 
     [Required]
     [MaxLength(100)]
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public string Name { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     [MaxLength(500)]
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public string Description { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     public DateTime CreatedAt { get; set; }
+
     public DateTime? UpdatedAt { get; set; }
 
+#pragma warning disable CA2227 // Collection properties should be read only
     public ICollection<TaskEntity> Tasks { get; set; } = new List<TaskEntity>();
+#pragma warning restore CA2227 // Collection properties should be read only
 }

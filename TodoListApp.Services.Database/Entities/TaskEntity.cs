@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TodoListApp.Services.Database.Entities;
 public class TaskEntity
@@ -14,7 +9,9 @@ public class TaskEntity
 
     [Required]
     [MaxLength(200)]
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public string Title { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     [Required]
     [MaxLength(500)]
@@ -23,14 +20,11 @@ public class TaskEntity
     [Required]
     public DateTime? DueDate { get; set; }
 
-    //public bool Completed => StatusId?.ToLower() == "Completed";
-
     public bool Completed { get; set; }
 
     public bool IsCompleted { get; set; }
 
     public bool Overdue { get; set; }
-    //public bool Overdue => (StatusId?.ToLower() == "in progress" || StatusId?.ToLower() == "not started") && DueDate < DateTime.Today;
 
     [ForeignKey(nameof(TodoListEntity))]
     public int TodoListId { get; set; }
@@ -40,7 +34,11 @@ public class TaskEntity
 
     public string? AssignedToUserId { get; set; } = null!;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public TodoListEntity TodoList { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public StatusEntity Status { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }
